@@ -82,11 +82,6 @@ body {
   display: flex;
   align-items: center;
 }
-.page-header {
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 0;
-}
 
 /* Задаем стиль для h2 */
 .container h2 {
@@ -105,6 +100,8 @@ body {
 /* =======================ШАПКА САЙТА========================= */
 /* Шапка сайта */
 .page-header {
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--header-background-color);
   font-weight: 500;
   font-size: 14px;
@@ -141,11 +138,25 @@ body {
 .site-nav .link {
   color: var(--title-text-color); /* Вторичный цвет текста #212121 */
   text-decoration: none;
+  position: relative;
+  padding: 25px 0;
 }
+.site-nav .current::after {
+  content: '';
+  height: 4px;
+  width: 100%;
+  background-color: var(--accent-color);
+  display: block;
+  position: absolute;
+  top: calc(100% - 4px);
+  right: 0;
+}
+
 .site-nav .link:hover,
 .site-nav .link:focus {
   color: var(--accent-color); /* Синий цвет #2196F3 */
 }
+
 /* Активная страница */
 .site-nav .link.current {
   color: var(--accent-color);
@@ -176,7 +187,14 @@ body {
 }
 .communication-header .link:hover,
 .communication-header .link:focus {
-  color: var(--accent-color); /* Синий цвет #2196F3 */
+  color: var(--accent-color);
+  /* Синий цвет #2196F3 */
+}
+.link svg {
+  fill: var(--regular-client-link-primary-color);
+}
+.link:hover svg {
+  fill: var(--accent-color);
 }
 
 /* ================================================ */
@@ -192,7 +210,7 @@ body {
     url(../images/bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 1600px;
+  width: 100vw;
 }
 
 .hero-title {
@@ -426,6 +444,7 @@ body {
 /* Кнопки */
 .button {
   font-family: inherit;
+  border-bottom-width: 0;
   cursor: pointer;
 }
 .hero-btn {
@@ -438,7 +457,9 @@ body {
   background-color: var(--accent-color);
   margin: 0 auto;
   display: block;
+  border: 0px;
   border-radius: 5px;
+  padding: 10px 32px;
 }
 .hero-btn:hover,
 .hero-btn:focus {
@@ -544,3 +565,45 @@ footer {
   fill: var(--logo-footer-color);
 }
 /* ================================================ */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  transition: all 500ms linear;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 528px;
+  height: 581px;
+  background-color: var(--primary-background-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
